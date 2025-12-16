@@ -7,7 +7,6 @@ from datetime import datetime
 
 def main():
     # TODO: Get Reddit API credentials (free)
-    # TODO: Install PRAW: pip install praw pandas
     # TODO: Scrape last 100 posts from r/wallstreetbets
     # TODO: Extract: post title, body, score, comments, timestamp
     # TODO: Save to CSV
