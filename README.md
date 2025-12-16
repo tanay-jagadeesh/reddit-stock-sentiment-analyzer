@@ -1,4 +1,4 @@
-# Reddit Sentiment Analyzer for Stock Mentions
+# Twitter Sentiment Analyzer for Stock Mentions
 
 ## What it does
 Scrapes r/wallstreetbets, analyzes sentiment around stocks, correlates with price movements
@@ -19,14 +19,18 @@ Scrapes r/wallstreetbets, analyzes sentiment around stocks, correlates with pric
 
 ## Project phases
 
-### Day 1-2: Set up Reddit scraping
-- [ ] Get Reddit API credentials (free)
-- [ ] Install PRAW: `pip install praw pandas`
-- [ ] Create `reddit_scraper.py`
-- [ ] Scrape last 100 posts from r/wallstreetbets
-- [ ] Extract: post title, body, score, comments, timestamp
-- [ ] Save to CSV
-- [ ] Commit to GitHub
+### Day 1-2: 
+Day 1: Set up Twitter API with Tweepy
+Go to https://developer.twitter.com/en/portal/dashboard
+Sign up for Twitter Developer account (free)
+Create a new app/project
+Get your API credentials:
+API Key
+API Secret Key
+Bearer Token
+Install Tweepy: pip install tweepy pandas
+Create config.py to store credentials (add to .gitignore!)
+Test connection with simple script:
 
 ## Author
 tanay-jagadeesh
