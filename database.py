@@ -19,9 +19,10 @@ c.execute("""CREATE TABLE articles (
     author TEXT
 )""")
 
+#create a stocks table
 c.execute("""CREATE TABLE stocks (
-    ticker TEXT,
-    company_name TEXT,      
+    ticker TEXT PRIMARY KEY,
+    company_name TEXT  
 )  
 """)
 
