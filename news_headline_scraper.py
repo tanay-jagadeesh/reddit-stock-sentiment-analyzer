@@ -24,18 +24,8 @@ ticker_symbols = {
     "UNH": "UnitedHealth OR United Health",
     "DIS": "Disney"
 }
-article_list = []
-for key in ticker_symbols:
-    response = requests.get(f"https://newsapi.org/v2/everything?q={ticker_symbols[key]}&pageSize=20&apiKey={config.API_KEY}")
 
-    # Error Handling to see if it prints json
-    try:
-        response.raise_for_status()
-        print(response.json())
-    except requests.exceptions.HTTPError as e:
-        print(f"HTTP error: {e}")
-
-    """Extracts News from Api"""
+"""Extracts News from Api"""
 def extract_news():
     for article in response.json()['articles']:
         data = {
@@ -49,8 +39,19 @@ def extract_news():
             "content": article['content']
         }
         article_list.append(data)
-    df = pd.DataFrame(article_list)
-    df.to_csv('news_data.csv')
-    return article_list
 
-extract_news() 
+article_list = []
+for key in ticker_symbols:
+    response = requests.get(f"https://newsapi.org/v2/everything?q={ticker_symbols[key]}&pageSize=20&apiKey={config.API_KEY}")
+
+    # Error Handling to see if it prints json
+    try:
+        response.raise_for_status()
+        print(response.json())
+    except requests.exceptions.HTTPError as e:
+        print(f"HTTP error: {e}")
+
+    extract_news()
+
+df = pd.DataFrame(article_list)
+df.to_csv('news_data.csv') 
