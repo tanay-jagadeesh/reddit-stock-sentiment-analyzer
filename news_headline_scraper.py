@@ -33,3 +33,5 @@ def extract_news():
     return article_list
 
 extract_news()
+
+stocks_in_demand = ["APPL", "GOOGL", "MSFT", "TSLA", "META", "NVDA", "AMZN", "JPM", "BAC", "GS", "V", "WMT", "JNJ", "UNH", "DIS"]
