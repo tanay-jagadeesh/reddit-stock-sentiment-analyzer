@@ -1,9 +1,15 @@
 # News Sentiment Analyzer for Stock Mentions
 # Day 1: Set up News API
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 import requests
 import config
+
+
+params = {
+    "from": (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d"),
+    "to": datetime.now().strftime("%Y-%m-%d")  
+}
 
 stocks_in_demand = ["AAPL", "GOOGL", "MSFT", "TSLA", "META", "NVDA", "AMZN", "JPM", "BAC", "GS", "V", "WMT", "JNJ", "UNH", "DIS"]
 
@@ -42,7 +48,7 @@ def extract_news():
 
 article_list = []
 for key in ticker_symbols:
-    response = requests.get(f"https://newsapi.org/v2/everything?q={ticker_symbols[key]}&pageSize=20&apiKey={config.API_KEY}")
+    response = requests.get(f"https://newsapi.org/v2/everything?q={ticker_symbols[key]}&pageSize=20&apiKey={config.API_KEY}", params = params)
 
     # Error Handling to see if it prints json
     try:
