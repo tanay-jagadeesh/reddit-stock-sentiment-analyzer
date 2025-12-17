@@ -46,6 +46,10 @@ def query_article(ticker, from_date, to_date):
 conn.commit()
 
 for i, row in df.iterrows():
-    insert_article(row['ticker'], row['title'], row['description'], row['content'], row['source'], row['publishedAt'], row['url'], row['author'])
+    try:
+        insert_article(row['ticker'], row['title'], row['description'], row['content'], str(row['source']), row['publishedAt'], row['url'], row['author'])
+    except sqlite3.IntegrityError:
+        print(f"Skipping duplicate article: {row['url']}")
+        continue
 
 conn.close()
