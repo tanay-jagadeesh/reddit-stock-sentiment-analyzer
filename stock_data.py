@@ -26,9 +26,12 @@ def stock_prices():
     for ticker in ticker_symbols:
         data = yf.download(ticker, start = start_date, end = end_date, interval = '1d')
 
+        data["price_change_pct"] = ((data['Close'] - data['Close'].shift(1)) / data['Close'].shift(1)) * 100
+
         for i, row in data.iterrows():
             c.execute("INSERT INTO stock_prices(ticker, date, open, close, high, low, volume, price_change_pct) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-            (ticker, str(i), row['Open'], row['Close'], row['High'], row['Low'], row['Volume'], None))
+            (ticker, str(i), row['Open'], row['Close'], row['High'], row['Low'], row['Volume'], row["price_change_pct"]))
+
 stock_prices()
 
 conn.commit()
