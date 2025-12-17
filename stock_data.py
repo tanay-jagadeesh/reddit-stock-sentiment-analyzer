@@ -30,7 +30,7 @@ def stock_prices():
 
         for i, row in data.iterrows():
             c.execute("INSERT INTO stock_prices(ticker, date, open, close, high, low, volume, price_change_pct) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-            (ticker, str(i), row['Open'], row['Close'], row['High'], row['Low'], row['Volume'], row["price_change_pct"]))
+            (ticker, str(i), float(row['Open']), float(row['Close']), float(row['High']), float(row['Low']), int(row['Volume']), float(row["price_change_pct"])))
 
 stock_prices()
 
