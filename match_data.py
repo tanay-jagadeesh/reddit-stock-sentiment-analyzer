@@ -1,4 +1,5 @@
 import sqlite3
+import pandas as pd 
 
 conn = sqlite3.connect('news.sentiment.db')
 conn2 = sqlite3.connect('stock_value.db')
@@ -21,6 +22,17 @@ c2.execute("SELECT * FROM stock_prices ")
 stock_price = c2.fetchone()
 just_stock_date = stock_price[1]
 print("Stock date: ", just_stock_date)
+
+# Load articles into DataFrame
+articles_df = pd.read_sql_query("SELECT * FROM articles", conn)
+
+# Load stock prices into DataFrame  
+stocks_df = pd.read_sql_query("SELECT * FROM stock_prices", conn2)
+
+# clean up the dates so they match format
+articles_df['date'] = articles_df['published_at'].str[:10]  
+stocks_df['date'] = stocks_df['date'].str[:10]  
+
 
 
 
