@@ -30,6 +30,11 @@ def insert_article(ticker, title, description, content, source, published_at, ur
     c.execute("INSERT INTO articles(ticker, title, description, content, source, published_at, url, author) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
               (ticker, title, description, content, source, published_at, url, author))
 
+def query_article(ticker, from_date, to_date):
+    c.execute("SELECT * FROM articles WHERE ticker = ? AND published_at <= ? AND published_at >= ?",
+    (ticker, from_date, to_date))
+    return c.fetchall()
+
 conn.commit()
 
 conn.close()
