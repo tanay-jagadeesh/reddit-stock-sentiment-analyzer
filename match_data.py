@@ -1,8 +1,10 @@
 import sqlite3
 
 conn = sqlite3.connect('news.sentiment.db')
+conn2 = sqlite3.connect('stock_value.db')
 
 c = conn.cursor()
+c2 = conn2.cursor()
 
 c.execute("SELECT * FROM articles ")
 article = c.fetchone()
@@ -15,8 +17,10 @@ print("Full timestamp:", published_at)
 just_date = published_at[:10]
 print("Just the date:", just_date)
 
-
-
+c2.execute("SELECT * FROM stock_prices ")
+stock_price = c2.fetchone()
+just_stock_date = stock_price[1]
+print("Stock date: ", just_stock_date)
 
 
 
