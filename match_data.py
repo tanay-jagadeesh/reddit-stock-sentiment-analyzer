@@ -54,6 +54,21 @@ daily_stats = grouped.agg({
 print("\nDaily stats:")
 print(daily_stats.head())
 
+# Rename columns to match master dataset format
+daily_stats = daily_stats.rename(columns={
+    'article_id': 'article_count',
+    'source': 'source_count',
+    'title': 'titles_combined',
+    'open': 'open_price',
+    'close': 'close_price'
+})
+
+# Reset index to make ticker and date regular columns
+daily_stats = daily_stats.reset_index()
+
+print("\nMaster dataset:")
+print(daily_stats.head())
+
 conn.commit()
 
 conn.close()
