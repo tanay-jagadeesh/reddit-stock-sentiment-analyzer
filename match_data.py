@@ -39,11 +39,20 @@ merged_df = articles_df.merge(stocks_df, on=['ticker', 'date'], how='inner')
 print(f"Found {len(merged_df)} matches!")
 print(merged_df.head())
 
+grouped = merged_df.groupby(['ticker', 'date'])
 
+daily_stats = grouped.agg({
+    'article_id': 'count',
+    'source': 'nunique',
+    'title': lambda x: ' | '.join(x),
+    'open': 'first',
+    'close': 'first',
+    'volume': 'first',
+    'price_change_pct': 'first'
+})
 
-
-
-
+print("\nDaily stats:")
+print(daily_stats.head())
 
 conn.commit()
 
