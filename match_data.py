@@ -1,6 +1,7 @@
 import sqlite3
 import pandas as pd 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from text_processor import remove_url, remove_special_characters, lowercase, remove_whitespace
 
 conn = sqlite3.connect('news.sentiment.db')
 conn2 = sqlite3.connect('stock_value.db')
