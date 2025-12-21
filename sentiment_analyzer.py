@@ -31,3 +31,13 @@ articles_df['pos'] = articles_df['vader_sentiment'].apply(lambda x: x['pos'])
 articles_df['compound'] = articles_df['vader_sentiment'].apply(lambda x: x['compound'])
 
 print(articles_df[['title', 'neg', 'neu', 'pos', 'compound']].head())
+
+def classify_sentiment(compound):
+    if compound > 0.05:
+        return "bullish"
+    elif compound < -0.05:
+        return "bearish"
+    else:
+        return "neutral"
+
+articles_df['classify'] = articles_df['compound'].apply(classify_sentiment)
