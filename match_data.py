@@ -107,6 +107,8 @@ def cleaned(txt):
     lower = lowercase(special)
     return lower
 
+articles_df['cleaned_text'] = articles_df['title'].apply(cleaned)
+
 conn.commit()
 
 conn.close()
