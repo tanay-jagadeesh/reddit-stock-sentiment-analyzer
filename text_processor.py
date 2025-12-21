@@ -9,3 +9,6 @@ def remove_special_characters(s):
     res = re.sub(r'[^a-zA-Z0-9]', '', s)
     return res
 
+def lowercase(txt):
+    lower = txt.lower()
+    return lower
