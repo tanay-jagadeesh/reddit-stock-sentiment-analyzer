@@ -29,3 +29,5 @@ articles_df['neu'] = articles_df['vader_sentiment'].apply(lambda x: x['neu'])
 articles_df['pos'] = articles_df['vader_sentiment'].apply(lambda x: x['pos'])
 
 articles_df['compound'] = articles_df['vader_sentiment'].apply(lambda x: x['compound'])
+
+print(articles_df[['title', 'neg', 'neu', 'pos', 'compound']].head())
