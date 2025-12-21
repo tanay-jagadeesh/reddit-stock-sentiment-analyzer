@@ -45,3 +45,11 @@ articles_df['classify'] = articles_df['compound'].apply(classify_sentiment)
 print(articles_df[['title', 'compound', 'classify']].head(10))
 
 print(f"The average compound score: {articles_df['compound'].agg('mean')}")
+
+total = len(articles_df['classify'])
+
+print(f"The % bullish articles: {(articles_df['classify'] == "bullish").sum() / total}")
+
+print(f"The % bearish articles: {(articles_df['classify'] == "bearish").sum() / total}")
+
+print(f"The % neutral articles: {(articles_df['classify'] == "neutral").sum() / total}")
