@@ -43,3 +43,5 @@ def classify_sentiment(compound):
 articles_df['classify'] = articles_df['compound'].apply(classify_sentiment)
 
 print(articles_df[['title', 'compound', 'classify']].head(10))
+
+print(f"The average compound score: {articles_df['compound'].agg('mean')}")
