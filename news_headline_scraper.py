@@ -7,8 +7,8 @@ import config
 
 
 params = {
-    "from": (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d"),
-    "to": datetime.now().strftime("%Y-%m-%d")  
+    "from": (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d"),
+    "to": datetime.now().strftime("%Y-%m-%d")
 }
 
 stocks_in_demand = ["AAPL", "GOOGL", "MSFT", "TSLA", "META", "NVDA", "AMZN", "JPM", "BAC", "GS", "V", "WMT", "JNJ", "UNH", "DIS"]
