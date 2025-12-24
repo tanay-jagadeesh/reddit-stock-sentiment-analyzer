@@ -99,3 +99,20 @@ features['target'] = features['next_day_change']
 features = features.groupby('ticker', group_keys=False).apply(lambda x: x.ffill())
 features = features.groupby('ticker', group_keys=False).apply(lambda x: x.bfill())
 features = features.fillna(0)
+
+# Normalize features
+features_to_scale = [
+    'sentiment', 'sentiment_lag1', 'sentiment_3day', 'sentiment_7day', 'sentiment_momentum',
+    'article_count', 'article_7day_avg', 'article_volume_spike',
+    'source_diversity', 'bullish_pct', 'bearish_pct',
+    'close_price', 'price_ma5', 'price_ma10', 'price_ma20', 'price_volatility',
+    'rsi', 'price_momentum', 'sentiment_price_divergence'
+]
+
+features_scaled = features.copy()
+scaler = StandardScaler()
+for ticker in features_scaled['ticker'].unique():
+    ticker_mask = features_scaled['ticker'] == ticker
+    features_scaled.loc[ticker_mask, features_to_scale] = scaler.fit_transform(
+        features_scaled.loc[ticker_mask, features_to_scale]
+    )
