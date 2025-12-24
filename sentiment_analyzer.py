@@ -81,3 +81,10 @@ momentum_df = momentum.reset_index()
 
 # Merge sentiment momentum with articles
 merged_df = articles_df.merge(momentum_df, on=['ticker', 'date'], how='inner')
+
+#created histogram for sentiment distribution visualization
+plt.hist(articles_df['compound'])
+plt.xlabel('Compound Sentiment Score')
+plt.ylabel('Number of Articles')
+plt.title('Distribution of Sentiment Scores')
+plt.show()
