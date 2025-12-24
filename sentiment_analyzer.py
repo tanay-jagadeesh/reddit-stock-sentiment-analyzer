@@ -129,3 +129,14 @@ combined_data['article_count'] = combined_data['article_count'].fillna(0)
 # Calculate correlation between article volume and next-day price change
 correlation = combined_data['article_count'].corr(combined_data['next_day_change'])
 print(f"Correlation between article volume and next-day price change: {correlation}")
+
+# 2. Sentiment score to next-day price change
+# Get average daily sentiment per ticker
+daily_sentiment_avg = articles_df.groupby(['ticker', 'date'])['compound'].mean().reset_index(name='avg_sentiment')
+
+# Merge with combined_data
+combined_data = combined_data.merge(daily_sentiment_avg, on=['ticker', 'date'], how='left')
+
+# Calculate correlation
+sentiment_corr = combined_data['avg_sentiment'].corr(combined_data['next_day_change'])
+print(f"Correlation between sentiment score and next-day price change: {sentiment_corr}")
