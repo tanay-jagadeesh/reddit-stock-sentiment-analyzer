@@ -4,6 +4,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from text_processor import remove_url, remove_special_characters, lowercase, remove_whitespace
 from match_data import cleaned
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Connect to database
 conn = sqlite3.connect('news.sentiment.db')
@@ -155,3 +156,20 @@ combined_data['bullish_pct'] = (combined_data['bullish_count'] / combined_data['
 # Calculate correlation
 bullish_corr = combined_data['bullish_pct'].corr(combined_data['next_day_change'])
 print(f"Correlation between bullish % and next-day price change: {bullish_corr}")
+
+# Create correlation matrix and heatmap
+# Select only the columns we want to correlate
+corr_data = combined_data[['article_count', 'avg_sentiment', 'bullish_pct', 'next_day_change']].dropna()
+
+# Calculate correlation matrix
+corr_matrix = corr_data.corr()
+
+# Print the correlation matrix
+print("\nCorrelation Matrix:")
+print(corr_matrix)
+
+# Create heatmap visualization
+plt.figure(figsize=(8, 6))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0, fmt='.3f')
+plt.title('Correlation Matrix: Article Metrics vs Next-Day Price Change')
+plt.show()
