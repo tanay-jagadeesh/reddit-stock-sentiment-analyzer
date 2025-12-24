@@ -1,8 +1,9 @@
 import sqlite3
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-
-print("Loading data...")
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from text_processor import remove_url, remove_special_characters, lowercase, remove_whitespace
+from match_data import cleaned
 
 # Load articles from database
 conn = sqlite3.connect('news.sentiment.db')
@@ -11,11 +12,6 @@ conn.close()
 
 # Load daily stats (already has price data and article counts)
 daily_stats = pd.read_csv('daily_stats.csv')
-
-# Calculate sentiment scores for each article
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from text_processor import remove_url, remove_special_characters, lowercase, remove_whitespace
-from match_data import cleaned
 
 analyzer = SentimentIntensityAnalyzer()
 articles_df['combined_text'] = (articles_df['title'].fillna('') + ' ' + articles_df['description'].fillna('')).apply(cleaned)
