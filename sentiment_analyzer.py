@@ -88,3 +88,21 @@ plt.xlabel('Compound Sentiment Score')
 plt.ylabel('Number of Articles')
 plt.title('Distribution of Sentiment Scores')
 plt.show()
+
+daily_stats = pd.read_csv('daily_stats.csv')
+
+# Merge sentiment with price data
+sentiment_df = daily_sentiment.reset_index()
+combined = daily_stats.merge(sentiment_df, on=['ticker', 'date'])
+
+# Filter for AAPL only
+aapl = combined[combined['ticker'] == 'AAPL']
+
+# Plot
+plt.plot(aapl['date'], aapl['compound'], label='Sentiment')
+plt.plot(aapl['date'], aapl['close_price'], label='Price')
+plt.xlabel('Date')
+plt.ylabel('Value')
+plt.title('Sentiment vs. Price for AAPL')
+plt.legend()
+plt.show()
