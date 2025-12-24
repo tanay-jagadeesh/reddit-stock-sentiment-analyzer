@@ -56,3 +56,9 @@ print(f"The average compound score for each ticker: {articles_df.groupby('ticker
 
 print(f"The % neutral articles: {(articles_df['classify'] == "neutral").sum() / total}")
 
+articles_df['date'] = articles_df['published_at'].str[:10]
+
+daily_sentiment = articles_df.groupby(['ticker','date'])['compound'].mean()
+
+momentum = daily_sentiment - daily_sentiment.shift(3)
+print(momentum)
