@@ -94,3 +94,8 @@ features = pd.concat([features, day_dummies], axis=1)
 
 # Target variable
 features['target'] = features['next_day_change']
+
+# Handle missing values
+features = features.groupby('ticker', group_keys=False).apply(lambda x: x.ffill())
+features = features.groupby('ticker', group_keys=False).apply(lambda x: x.bfill())
+features = features.fillna(0)
