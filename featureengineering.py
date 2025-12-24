@@ -52,3 +52,14 @@ features['sentiment_momentum'] = features.groupby('ticker')['sentiment'].transfo
 features['article_7day_avg'] = features.groupby('ticker')['article_count'].transform(lambda x: x.rolling(7, min_periods=1).mean())
 features['article_volume_spike'] = features['article_count'] / (features['article_7day_avg'] + 1)
 features['source_diversity'] = features['source_count']
+
+# Bullish/bearish percentages
+bullish_counts = articles_df[articles_df['classify'] == 'bullish'].groupby(['ticker', 'date']).size().reset_index(name='bullish_count')
+features = features.merge(bullish_counts, on=['ticker', 'date'], how='left')
+features['bullish_count'] = features['bullish_count'].fillna(0)
+features['bullish_pct'] = (features['bullish_count'] / (features['article_count'] + 1))
+
+bearish_counts = articles_df[articles_df['classify'] == 'bearish'].groupby(['ticker', 'date']).size().reset_index(name='bearish_count')
+features = features.merge(bearish_counts, on=['ticker', 'date'], how='left')
+features['bearish_count'] = features['bearish_count'].fillna(0)
+features['bearish_pct'] = (features['bearish_count'] / (features['article_count'] + 1))
