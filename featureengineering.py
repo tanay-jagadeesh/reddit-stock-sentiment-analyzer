@@ -80,3 +80,17 @@ def calculate_rsi(prices, period=14):
 
 features['rsi'] = features.groupby('ticker')['close_price'].transform(lambda x: calculate_rsi(x))
 features['price_momentum'] = features.groupby('ticker')['close_price'].pct_change(periods=3)
+
+# Sentiment-price divergence
+features['price_change'] = features.groupby('ticker')['close_price'].pct_change()
+features['sentiment_change'] = features.groupby('ticker')['sentiment'].diff()
+features['sentiment_price_divergence'] = -1 * (features['price_change'] * features['sentiment_change'])
+
+# Day of week
+features['date_dt'] = pd.to_datetime(features['date'])
+features['day_of_week'] = features['date_dt'].dt.dayofweek
+day_dummies = pd.get_dummies(features['day_of_week'], prefix='day')
+features = pd.concat([features, day_dummies], axis=1)
+
+# Target variable
+features['target'] = features['next_day_change']
