@@ -30,3 +30,13 @@ X_val = matrix_x[train_end:val_end]
 
 #final 15%
 X_test = matrix_x[val_end:]
+
+#first 70%
+Y_train = matrix_y[:train_end]
+
+#next 15%
+Y_val = matrix_y[train_end:val_end]
+
+#final 15%
+Y_test = matrix_y[val_end:]
+
