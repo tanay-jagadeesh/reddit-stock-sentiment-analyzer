@@ -21,3 +21,12 @@ n = len(df)
 train_end = int(n * 0.70)
 
 val_end = int(n * 0.85) #NOTE: where it ends/automatically goes to test end
+
+#first 70%
+X_train = matrix_x[:train_end]
+
+#next 15%
+X_val = matrix_x[train_end:val_end]
+
+#final 15%
+X_test = matrix_x[val_end:]
