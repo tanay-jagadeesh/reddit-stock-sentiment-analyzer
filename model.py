@@ -135,6 +135,8 @@ for train_index, val_index in (tscv.split(X_train)):
     model.fit(X_train_fold, y_train_fold)
 
     model_predictions = model.predict(X_val_fold)
+    score = r2_score(y_val_fold, model_predictions)
+    print(f"RF Fold score: {score}")
 
 #Decision Tree Regressor
 for train_index, val_index in (tscv.split(X_train)):
@@ -148,6 +150,8 @@ for train_index, val_index in (tscv.split(X_train)):
     model.fit(X_train_fold, y_train_fold)
 
     model_predictions = model.predict(X_val_fold)
+    score = r2_score(y_val_fold, model_predictions)
+    print(f"DT Fold score: {score}")
 
 #Linear Regressor
 for train_index, val_index in (tscv.split(X_train)):
@@ -161,6 +165,8 @@ for train_index, val_index in (tscv.split(X_train)):
     model.fit(X_train_fold, y_train_fold)
 
     model_predictions = model.predict(X_val_fold)
+    score = r2_score(y_val_fold, model_predictions)
+    print(f"LR Fold score: {score}")
 
 #Gradient Boosting Regressor
 for train_index, val_index in (tscv.split(X_train)):
@@ -174,6 +180,8 @@ for train_index, val_index in (tscv.split(X_train)):
     model.fit(X_train_fold, y_train_fold)
 
     model_predictions = model.predict(X_val_fold)
+    score = r2_score(y_val_fold, model_predictions)
+    print(f"GB Fold score: {score}")
 
 #xgboost
 for train_index, val_index in (tscv.split(X_train)):
@@ -187,3 +195,5 @@ for train_index, val_index in (tscv.split(X_train)):
     model.fit(X_train_fold, y_train_fold)
 
     model_predictions = model.predict(X_val_fold)
+    score = r2_score(y_val_fold, model_predictions)
+    print(f"XGB Fold score: {score}")
