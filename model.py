@@ -3,7 +3,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier, GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error, root_mean_squared_error, r2_score, mean_absolute_error
-
+from xgboost import XGBRegressor
 
 # Load train/val/test sets
 X_train = pd.read_csv('X_train.csv')
@@ -111,3 +111,9 @@ rfc_predictions = rfc.predict(X_val)
 gbc = GradientBoostingRegressor()
 gbc.fit(X_train, y_train)
 gbc_predictions = gbc.predict(X_val)
+
+#XGboost model
+
+xgb_model = XGBRegressor()
+xgb_model.fit(X_train, y_train)
+xgb_predictions = xgb_model.predict(X_val)
