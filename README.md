@@ -8,7 +8,7 @@ Collects financial news articles for major stocks, analyzes sentiment using NLP,
 **NLP & Sentiment:** VADER (vaderSentiment), NLTK
 **Machine Learning:** scikit-learn, scipy, NumPy
 **Visualization:** Streamlit, Plotly, Matplotlib, seaborn
-**Deployment:** Streamlit Cloud
+**Deployment:** Streamlit Cloud (on hold)
 
 ## Features
 
