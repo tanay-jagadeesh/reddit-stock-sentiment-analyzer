@@ -3,6 +3,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, root_mean_squared_error, r2_score, mean_absolute_error
+from sklearn.ensemble import RandomForestClassifier
 
 # Load train/val/test sets
 X_train = pd.read_csv('X_train.csv')
@@ -99,4 +100,8 @@ print(f"  Lowest MAE: {comparison_df.loc[comparison_df['MAE'].idxmin(), 'Model']
 # saved results to csv file
 comparison_df.to_csv('model_comparison.csv', index=False)
 
+#Random Forest Classifier model
 
+rfc = RandomForestClassifier()
+rfc.fit(X_train, y_train)
+rfc_predictions = rfc.predict(X_val)
