@@ -33,10 +33,13 @@ rf_model.fit(X_train, y_train)
 rf_predictions = rf_model.predict(X_val)
 
 #Mean Squared Error for Lin Reg
-mean_squared_error(y_val, reg_model_predictions)
+lr_mse = mean_squared_error(y_val, reg_model_predictions)
+print(f"Linear Regression MSE: {lr_mse}")
 
 #Mean Squared Error for decision tree
-mean_squared_error(y_val, dt_predictions)
+dt_mse = mean_squared_error(y_val, dt_predictions)
+print(f"Decision Tree MSE: {dt_mse}")
 
-#Mean Squared Error for random forest 
-mean_squared_error(y_val, rf_predictions)
+#Mean Squared Error for random forest
+rf_mse = mean_squared_error(y_val, rf_predictions)
+print(f"Random Forest MSE: {rf_mse}")
