@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error, root_mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, root_mean_squared_error, r2_score, mean_absolute_error
 
 # Load train/val/test sets
 X_train = pd.read_csv('X_train.csv')
@@ -67,3 +67,15 @@ print(f"Decision Tree R²: {dt_r2}")
 #R² Score for random forest
 rf_r2 = r2_score(y_val, rf_predictions)
 print(f"Random Forest R²: {rf_r2}")
+
+#MAE for Lin Reg
+lr_mae = mean_absolute_error(y_val, reg_model_predictions)
+print(f"Linear Regression MAE: {lr_mae}")
+
+#MAE for decision tree
+dt_mae = mean_absolute_error(y_val, dt_predictions)
+print(f"Decision Tree MAE: {dt_mae}")
+
+#MAE for random forest
+rf_mae = mean_absolute_error(y_val, rf_predictions)
+print(f"Random Forest MAE: {rf_mae}")
